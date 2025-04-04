@@ -42,6 +42,7 @@ public class ConnectionDB {
     public static Connection obtener() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
 public static boolean autenticarUsuario(String username, String password) {
         String sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
 
@@ -65,7 +66,7 @@ public static boolean autenticarUsuario(String username, String password) {
     }
 
 public static boolean registrarUsuario(String username, String password) {
-        String sql = "INSERT INTO usuarios (usuario, contraseña) VALUES (?, ?)";
+        String sql = "INSERT INTO usuarios (nombre, password) VALUES (?, ?)";
 
         try (Connection conn = obtener(); 
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -84,7 +85,7 @@ public static boolean registrarUsuario(String username, String password) {
 }
     public static List<usuario> obtenerUsuarios() {
         List<usuario> usuarios1 = new ArrayList<>();
-        String query = "SELECT id_usuario, nombre, correo, contraseña, rol FROM tblUsuarios";
+        String query = "SELECT id_usuario, nombre, correo, password, rol FROM tblUsuarios";
         
         try (Connection conn = conectar(); 
              Statement stmt = conn.createStatement();

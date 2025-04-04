@@ -100,23 +100,23 @@ public class Ferreteria_login extends javax.swing.JFrame {
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // Obtener los valores de los campos de texto (usuario y contraseña)
         String usuario = txtUsuario.getText();
-        String contraseña;
-        contraseña = new String(psdContraseña.getPassword());
+        String password;
+        password = new String(psdContraseña.getPassword());
 
         // Validación de campos vacíos
-        if (usuario.isEmpty() || contraseña.isEmpty()) {
+        if (usuario.isEmpty() || password.isEmpty()) {
             // Si algún campo está vacío, muestra un mensaje de error
             JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Intentar conectar a la base de datos para verificar las credenciales
-        try (Connection conn = ConnectionDB.obtener()) {
+        try (Connection conn = ConnectionDB.conectar()) {
             // Consulta SQL para verificar si el usuario y contraseña existen en la base de datos
-            String sql = "SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?";
+            String sql = "SELECT * FROM usuarios WHERE nombre = ? AND password = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, usuario);  // Establecer el valor del nombre de usuario
-            stmt.setString(2, contraseña);  // Establecer el valor de la contraseña
+            stmt.setString(2, password);  // Establecer el valor de la contraseña
             ResultSet rs = stmt.executeQuery();  // Ejecutar la consulta
 
             // Si se encuentra un resultado (usuario y contraseña correctos)

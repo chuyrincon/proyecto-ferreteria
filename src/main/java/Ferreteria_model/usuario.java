@@ -14,7 +14,7 @@ public class usuario {
     private int id_usuario;
     private String nombre;
     private String correo;
-    private String contraseña;
+    private String password;
     private String rol;
 
     public int getId_usuario() {
@@ -41,12 +41,12 @@ public class usuario {
         this.correo = correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRol() {
