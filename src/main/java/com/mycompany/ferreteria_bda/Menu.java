@@ -4,10 +4,14 @@
  */
 package com.mycompany.ferreteria_bda;
 
+import Ferreteria_model.Clientes;
+import com.mycompany.ferreteria_bda.ClienteForm;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,8 +24,8 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-        setExtendedState(javax.swing.JFrame.NORMAL);
-        SetImagenLabel (lblFondo, "src/imagen/fondo_main.jpg");
+        setSize(600, 400);
+        setLocationRelativeTo(null); 
     }
 
     /**
@@ -33,83 +37,102 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        lblFondo = new javax.swing.JLabel();
+        btnProductos = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnDetalleVenta = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
+        btnProvedores = new javax.swing.JButton();
+        btnVentas = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jButton4.setText("productos");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(180, 20, 84, 23);
+        btnProductos.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnProductos.setText("Productos");
+        getContentPane().add(btnProductos);
+        btnProductos.setBounds(10, 70, 130, 40);
 
-        jButton5.setText("salir");
-        getContentPane().add(jButton5);
-        jButton5.setBounds(451, 20, 72, 23);
-
-        jButton6.setText("detalleVenta");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6);
-        jButton6.setBounds(348, 20, 97, 23);
+        getContentPane().add(btnSalir);
+        btnSalir.setBounds(10, 290, 120, 40);
 
-        jButton1.setText("clientes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDetalleVenta.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnDetalleVenta.setText("DetalleVenta");
+        btnDetalleVenta.setIconTextGap(-15);
+        btnDetalleVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDetalleVentaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(6, 20, 72, 23);
+        getContentPane().add(btnDetalleVenta);
+        btnDetalleVenta.setBounds(10, 230, 130, 40);
 
-        jButton2.setText("provedores");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnClientes.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnClientes.setText("Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(84, 20, 90, 23);
+        getContentPane().add(btnClientes);
+        btnClientes.setBounds(10, 20, 130, 40);
 
-        jButton3.setText("ventas");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnProvedores.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnProvedores.setText("Provedores");
+        btnProvedores.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnProvedores.setIconTextGap(-1);
+        btnProvedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnProvedoresActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(270, 20, 72, 23);
-        getContentPane().add(lblFondo);
-        lblFondo.setBounds(0, 0, 530, 300);
+        getContentPane().add(btnProvedores);
+        btnProvedores.setBounds(10, 120, 130, 40);
+
+        btnVentas.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnVentas.setText("Ventas");
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVentas);
+        btnVentas.setBounds(10, 170, 130, 40);
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(240, 80, 170, 170);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ClienteForm clienteForm = new ClienteForm();
-       clienteForm.setVisible(true);        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnDetalleVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleVentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnDetalleVentaActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        ClienteForm clienteForm = new ClienteForm();
+        clienteForm.setVisible(true);
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnProvedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProvedoresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnProvedoresActionPerformed
+
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVentasActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+         this.dispose(); 
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,27 +168,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void SetImagenLabel(JLabel lblName, String root) {
-    try {
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(
-            image.getImage().getScaledInstance(lblName.getWidth(), lblName.getHeight(), Image.SCALE_DEFAULT));
-        lblName.setIcon(icon);
-        this.repaint(); 
-    } catch (Exception e) {
-        System.out.println("No se pudo cargar la imagen: " + e.getMessage());
-    }
-}
-
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel lblFondo;
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnDetalleVenta;
+    private javax.swing.JButton btnProductos;
+    private javax.swing.JButton btnProvedores;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnVentas;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

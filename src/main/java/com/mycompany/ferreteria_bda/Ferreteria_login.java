@@ -123,6 +123,8 @@ public class Ferreteria_login extends javax.swing.JFrame {
             if (rs.next()) {
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();  // Cierra la ventana de login
+                Menu menu = new Menu();
+                menu.setVisible(true);
             } else {
                 // Si no se encuentra un resultado, muestra un mensaje de error
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
