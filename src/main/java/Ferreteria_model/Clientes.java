@@ -28,7 +28,7 @@ public class Clientes {
         this.telefono = telefono;
     }
 public Clientes() {
-    // No hace nada, pero permite crear el objeto vacío
+   
 }
     
     public int getId_cliente() {

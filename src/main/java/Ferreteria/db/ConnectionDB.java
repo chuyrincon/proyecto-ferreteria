@@ -5,7 +5,7 @@
 package Ferreteria.db;
 
 
-import Ferreteria_model.usuario;
+import Ferreteria_model.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -71,7 +71,7 @@ public static boolean registrarUsuario(String username, String password) {
         try (Connection conn = obtener(); 
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            // Se asignan los valores de usuario y contraseña a la consulta
+            // Se asignan los valores de Usuario y contraseña a la consulta
             stmt.setString(1, username);
             stmt.setString(2, password);
 
@@ -83,8 +83,8 @@ public static boolean registrarUsuario(String username, String password) {
             return false;
         }
 }
-    public static List<usuario> obtenerUsuarios() {
-        List<usuario> usuarios1 = new ArrayList<>();
+    public static List<Usuario> obtenerUsuarios() {
+        List<Usuario> usuarios1 = new ArrayList<>();
         String query = "SELECT id_usuario, nombre, correo, password, rol FROM tblUsuarios";
         
         try (Connection conn = conectar(); 
@@ -94,7 +94,7 @@ public static boolean registrarUsuario(String username, String password) {
             // Iterar a través de los resultados de la consulta
             while (rs.next()) {
                 // Crear un objeto Usuario y asignar los valores obtenidos
-                usuario usuarios = new usuario(
+                Usuario usuarios = new Usuario(
                         rs.getInt("id_usuario"),          
                         rs.getString("nombre"),      
                         rs.getString("correo"),   
