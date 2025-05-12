@@ -4,17 +4,38 @@
  */
 package com.mycompany.ferreteria_bda;
 
+import Ferreteria_model.Clientes;
+import Ferreteria_model.Productos;
+import Ferreteria_model.Ventas;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import java.awt.event.ItemEvent;
+
+
 /**
  *
  * @author Dell
  */
 public class VentaForm extends javax.swing.JFrame {
+    
 
+    DefaultTableModel modelo;
+    int id = 0;
     /**
      * Creates new form Venta
      */
     public VentaForm() {
         initComponents();
+        cmbProducto.setModel(new DefaultComboBoxModel<>(new String[] {})); // Vacia el ComboBox de Producto
+        cmbCliente.setModel(new DefaultComboBoxModel<>(new String[] {}));  // Vacia el ComboBox de Cliente
+       
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        cmbProducto.addItemListener(evt -> cmbProductoItemStateChanged(evt));
     }
 
     /**
@@ -26,22 +47,226 @@ public class VentaForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        cmbProducto = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtStock = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblVenta = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cmbCliente = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        txtPagar = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        agregarCliente = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        getContentPane().setLayout(null);
+
+        jLabel1.setText("Producto");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(30, 20, 90, 16);
+
+        cmbProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cmbProducto);
+        cmbProducto.setBounds(0, 50, 120, 22);
+
+        jLabel2.setText("Cantidad");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(160, 20, 90, 16);
+        getContentPane().add(txtCantidad);
+        txtCantidad.setBounds(150, 50, 110, 22);
+
+        jLabel3.setText("Precio");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(310, 20, 60, 16);
+        getContentPane().add(txtPrecio);
+        txtPrecio.setBounds(290, 50, 80, 22);
+
+        jLabel4.setText("Stock");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(420, 20, 60, 16);
+        getContentPane().add(txtStock);
+        txtStock.setBounds(400, 50, 80, 22);
+
+        tblVenta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Descripcicon", "Cantidad", "Precio", "Total"
+            }
+        ));
+        jScrollPane1.setViewportView(tblVenta);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 90, 700, 150);
+
+        jLabel5.setText("Seleccionar fecha");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(550, 0, 110, 16);
+        getContentPane().add(txtFecha);
+        txtFecha.setBounds(540, 20, 100, 22);
+
+        jLabel6.setText("Cliente");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(20, 260, 80, 16);
+
+        cmbCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cmbCliente);
+        cmbCliente.setBounds(10, 290, 90, 22);
+
+        jLabel7.setText("Total a pagar");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(500, 270, 80, 16);
+        getContentPane().add(txtPagar);
+        txtPagar.setBounds(590, 270, 100, 22);
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAgregar);
+        btnAgregar.setBounds(530, 50, 90, 23);
+
+        agregarCliente.setText("agregar cliente");
+        agregarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarClienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarCliente);
+        agregarCliente.setBounds(10, 330, 120, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        cargarProductos();
+        cargarClientes();
+        eliminarFilasVacias();
+        establecerFechaActual();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void eliminarFilasVacias() {
+    DefaultTableModel modelo = (DefaultTableModel) tblVenta.getModel();
+    int filas = modelo.getRowCount();
+
+    // Recorrer las filas de la tabla de abajo hacia arriba
+    for (int i = filas - 1; i >= 0; i--) {
+        boolean filaVacia = true;
+
+        // Comprobar si todas las celdas de la fila están vacías
+        for (int j = 0; j < modelo.getColumnCount(); j++) {
+            if (modelo.getValueAt(i, j) != null && !modelo.getValueAt(i, j).toString().trim().isEmpty()) {
+                filaVacia = false;  // Si alguna celda tiene datos, no es vacía
+                break;
+            }
+        }
+
+        // Eliminar la fila si está vacía
+        if (filaVacia) {
+            modelo.removeRow(i);
+        }
+    }
+}
+    
+    private void establecerFechaActual() {
+    // Obtener la fecha actual del sistema en formato yyyy-MM-dd
+    java.time.LocalDate fechaActual = java.time.LocalDate.now();
+    // Asignar la fecha al JTextField
+    txtFecha.setText(fechaActual.toString());
+}
+    
+    
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+          // Obtener el producto seleccionado
+    String nombreProducto = (String) cmbProducto.getSelectedItem();
+    int cantidad = Integer.parseInt(txtCantidad.getText()); // Obtener la cantidad ingresada
+    int precio = Integer.parseInt(txtPrecio.getText());
+    int total = cantidad * precio;
+
+    // Añadir los datos a la tabla (sin incluir el stock)
+    DefaultTableModel modelo = (DefaultTableModel) tblVenta.getModel();
+    Object[] fila = new Object[4]; // Solo 4 columnas: Producto, Cantidad, Precio, Total
+    fila[0] = nombreProducto;
+    fila[1] = cantidad;
+    fila[2] = precio;
+    fila[3] = total;
+    modelo.addRow(fila);
+
+    // Actualizar el stock del producto en la base de datos
+    actualizarStockEnBaseDeDatos(nombreProducto, cantidad);
+    
+    // Refrescar el stock en la interfaz después de la actualización
+    actualizarDetallesProducto();
+
+    // Recalcular el total a pagar
+    actualizarTotalPagar();
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
+      
+    ClienteForm clienteForm = new ClienteForm(); // Crea la ventana ClienteForm
+    clienteForm.setVisible(true);                // Muestra la ventana ClienteForm
+    this.dispose();   
+    }//GEN-LAST:event_agregarClienteActionPerformed
+
+    private void actualizarTotalPagar() {
+    double totalPagar = 0;
+
+    // Recorremos todas las filas de la tabla
+    for (int i = 0; i < tblVenta.getRowCount(); i++) {
+        // Obtenemos el valor de la columna "Precio" (índice 2) y "Cantidad" (índice 1)
+        double precio = Double.parseDouble(tblVenta.getValueAt(i, 2).toString());
+        int cantidad = Integer.parseInt(tblVenta.getValueAt(i, 1).toString()); // Columna 1 para cantidad
+
+        // Calculamos el total por fila y sumamos
+        double total = precio * cantidad;
+        totalPagar += total;
+
+        // Actualizamos la columna "Total" (índice 3) con el cálculo
+        tblVenta.setValueAt(total, i, 3);  // Establecer el total en la columna de total
+    }
+
+    // Asignamos la suma total al campo txtPagar
+    txtPagar.setText(String.format("%.2f", totalPagar));  // Muestra el total con 2 decimales
+}
+
+
+    
+    private int obtenerIdProducto(String nombreProducto) {
+    List<Productos> productos = Productos.obtener(nombreProducto);
+    
+    // Buscar el producto en la lista y devolver su ID
+    for (Productos producto : productos) {
+        if (producto.getNombre().equals(nombreProducto)) {
+            return producto.getId_producto();
+        }
+    }
+    
+    // Si no se encuentra el producto, devolver -1
+    return -1;
+}
+
+    
     /**
      * @param args the command line arguments
      */
@@ -77,7 +302,117 @@ public class VentaForm extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+    
+      private void cargarProductos() {
+    List<Productos> productos = Productos.obtener("");  // Pasamos un filtro vacío para obtener todos los productos
+    DefaultComboBoxModel<String> modeloProducto = new DefaultComboBoxModel<>();
+
+    for (Productos p : productos) {
+        modeloProducto.addElement(p.getNombre());  // Añadimos solo el nombre del producto
+    }
+    
+    cmbProducto.setModel(modeloProducto);
+}
+
+
+    // Método para cargar clientes en el ComboBox
+    private void cargarClientes() {
+    List<Clientes> clientes = Clientes.obtener("");  // Obtener todos los clientes
+    DefaultComboBoxModel<String> modeloCliente = new DefaultComboBoxModel<>();
+    
+  
+
+    for (Clientes c : clientes) {
+        modeloCliente.addElement(c.getNombre());  // Añadimos solo el nombre del cliente
+    }
+
+    cmbCliente.setModel(modeloCliente);
+}
+
+
+    // Método para obtener los detalles del producto seleccionado
+      private void actualizarDetallesProducto() {
+    String nombreProducto = (String) cmbProducto.getSelectedItem();
+    List<Productos> productos = Productos.obtener(nombreProducto); // Esto devuelve una lista de productos
+
+    // Verificar si la lista tiene productos y tomar el primer producto
+    if (!productos.isEmpty()) {
+        Productos producto = productos.get(0); // Obtener el primer producto de la lista
+        txtPrecio.setText(String.valueOf(producto.getPrecio())); // Convertir precio a String
+        txtStock.setText(String.valueOf(producto.getStock()));   // Convertir stock a String
+    } else {
+        JOptionPane.showMessageDialog(this, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+      private void actualizarStockEnBaseDeDatos(String nombreProducto, int cantidadVendida) {
+    try {
+        // Obtener el producto desde la base de datos
+        List<Productos> productos = Productos.obtener(nombreProducto); // Obtener el producto por nombre
+        if (!productos.isEmpty()) {
+            Productos producto = productos.get(0);
+            int nuevoStock = producto.getStock() - cantidadVendida;
+
+            // Actualizar el stock en la base de datos
+            if (nuevoStock >= 0) {
+                boolean exito = Productos.editarStock(producto.getId_producto(), nuevoStock);
+                if (exito) {
+                    JOptionPane.showMessageDialog(this, "Stock actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al actualizar el stock.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No hay suficiente stock.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al obtener los productos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
+    // Método para manejar el evento ItemStateChanged cuando se selecciona un producto
+    private void cmbProductoItemStateChanged(ItemEvent evt) {
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            // Solo actualizar cuando se ha seleccionado un producto
+            actualizarDetallesProducto();
+        }
+    }
+
+    // Método para calcular el total a pagar
+    private void calcularTotal() {
+        try {
+            int cantidad = Integer.parseInt(txtCantidad.getText());
+            double precio = Double.parseDouble(txtPrecio.getText());
+            double total = cantidad * precio;
+            txtPagar.setText(String.valueOf(total));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error en los campos de cantidad o precio", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarCliente;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JComboBox<String> cmbCliente;
+    private javax.swing.JComboBox<String> cmbProducto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblVenta;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtPagar;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

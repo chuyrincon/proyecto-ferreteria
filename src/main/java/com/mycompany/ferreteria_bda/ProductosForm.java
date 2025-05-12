@@ -4,17 +4,31 @@
  */
 package com.mycompany.ferreteria_bda;
 
+import Ferreteria_model.Productos;
+import Ferreteria_model.Provedores;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Dell
  */
 public class ProductosForm extends javax.swing.JFrame {
+    
+    DefaultTableModel modelo;
+    int id = 0;
 
     /**
      * Creates new form Productos
      */
     public ProductosForm() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(583, 459);
+        setLocationRelativeTo(null); 
+        
     }
 
     /**
@@ -26,21 +40,337 @@ public class ProductosForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel2 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tlbProductos = new javax.swing.JTable();
+        txtNombre = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        txtPrecio = new javax.swing.JTextField();
+        btnEditar = new javax.swing.JButton();
+        txtFiltro = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        txtStock = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cmbProveedor = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollBar1 = new javax.swing.JScrollBar();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        getContentPane().setLayout(null);
+
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel2.setText("Descripcion");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(6, 109, 75, 18);
+
+        btnSalir.setBackground(new java.awt.Color(51, 153, 255));
+        btnSalir.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir);
+        btnSalir.setBounds(206, 6, 72, 25);
+
+        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel3.setText("Precio");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(6, 152, 56, 18);
+
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtDescripcion);
+        txtDescripcion.setBounds(87, 106, 172, 22);
+
+        tlbProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Descripcion", "Precio", "Stock", "Proveedor"
+            }
+        ));
+        jScrollPane1.setViewportView(tlbProductos);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 302, 577, 151);
+
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtNombre);
+        txtNombre.setBounds(87, 72, 172, 22);
+
+        btnGuardar.setBackground(new java.awt.Color(102, 255, 102));
+        btnGuardar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGuardar);
+        btnGuardar.setBounds(277, 223, 90, 25);
+
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtPrecio);
+        txtPrecio.setBounds(87, 149, 82, 22);
+
+        btnEditar.setBackground(new java.awt.Color(255, 255, 51));
+        btnEditar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditar);
+        btnEditar.setBounds(25, 6, 72, 25);
+
+        txtFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFiltroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtFiltro);
+        txtFiltro.setBounds(32, 267, 321, 22);
+
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel1.setText("Nombre");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(6, 75, 56, 18);
+
+        btnBuscar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar);
+        btnBuscar.setBounds(365, 267, 72, 25);
+
+        btnEliminar.setBackground(new java.awt.Color(255, 33, 36));
+        btnEliminar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminar);
+        btnEliminar.setBounds(115, 6, 74, 25);
+
+        txtStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtStock);
+        txtStock.setBounds(87, 189, 172, 22);
+
+        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel4.setText("Proveedor");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(6, 226, 75, 18);
+
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel5.setText("Stock");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(6, 192, 56, 18);
+
+        cmbProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cmbProveedor);
+        cmbProveedor.setBounds(87, 223, 172, 22);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/fondo_producto.png"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(0, 0, 590, 460);
+        getContentPane().add(jScrollBar1);
+        jScrollBar1.setBounds(560, 330, 10, 48);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+                                          
+    String nombre = txtNombre.getText();
+    String descripcion = txtDescripcion.getText();
+    String precioStr = txtPrecio.getText();
+    String stockStr = txtStock.getText();
+    String proveedorStr = (String) cmbProveedor.getSelectedItem();
+
+    // Validar que todos los campos obligatorios estén llenos
+    if (nombre.isEmpty() || precioStr.isEmpty() || stockStr.isEmpty() || proveedorStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor completa todos los campos obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        // Convertir precio a entero (si necesitas decimales, usa Double)
+        int precio = Integer.parseInt(precioStr);
+        
+        // Convertir stock a entero
+        int stock = Integer.parseInt(stockStr);
+
+        // Convertir el nombre del proveedor a su ID
+        int proveedorId = obtenerIdProveedor(proveedorStr);  // Método para obtener el ID del proveedor
+
+        // Guardar o editar el producto
+        boolean resultado = this.id == 0
+                ? Productos.guardar(nombre, descripcion, precio, stock, proveedorId)
+                : Productos.editar(this.id, nombre, descripcion, precio, stock, proveedorId);
+
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "El producto se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al intentar guardar el producto", "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Recargar la tabla y limpiar los campos
+        cargarTable("");
+        limpiarCampos();
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Precio debe ser decimal y stock debe ser un número entero válido", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+// Método para obtener el ID del proveedor según su nombre
+private int obtenerIdProveedor(String proveedorNombre) {
+    List<Provedores> proveedores = Provedores.obtener("");
+    for (Provedores proveedor : proveedores) {
+        if (proveedor.getNombre().equals(proveedorNombre)) {
+            return proveedor.getId_proveedor();  // Retorna el ID correspondiente
+        }
+    }
+    return -1;  // Retorna un ID inválido si no se encuentra
+
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+// TODO add your handling code here:
+int reglon = tlbProductos.getSelectedRow();  // Cambiar de tlbProvedores a tlbProductos
+
+// Verifica si se seleccionó una fila
+if (reglon != -1) {
+    // Obtener el ID de la fila seleccionada (supuesto que la columna 0 tiene el ID)
+    this.id = Integer.parseInt(tlbProductos.getModel().getValueAt(reglon, 0).toString());
+    
+    // Obtener los valores de la fila seleccionada (supuesto que las columnas 1, 2, 3 son nombre, precio y stock)
+    String nombre = tlbProductos.getModel().getValueAt(reglon, 1).toString();
+    String descripcion = tlbProductos.getModel().getValueAt(reglon, 2).toString();
+    String precio = tlbProductos.getModel().getValueAt(reglon, 3).toString();
+    String stock = tlbProductos.getModel().getValueAt(reglon, 4).toString();
+    String proveedor = tlbProductos.getModel().getValueAt(reglon, 5).toString();  // Suponiendo que la columna 5 es proveedor
+    
+    // Cargar los valores en los JTextField
+    txtNombre.setText(nombre);
+    txtDescripcion.setText(descripcion);
+    txtPrecio.setText(precio);
+    txtStock.setText(stock);
+
+    // Si tienes un ComboBox para seleccionar proveedores, seleccionamos el proveedor correspondiente
+    cmbProveedor.setSelectedItem(proveedor);  // Suponiendo que el ComboBox tiene el nombre del proveedor
+    
+    // Cambiar el botón de "Guardar" para que funcione como "Editar" (ya está hecho en el método de guardar)
+    btnGuardar.setText("Actualizar");
+} else {
+    JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+}
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        cargarTable(txtFiltro.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    // TODO add your handling code here:
+if (tlbProductos.getSelectedRow() == -1) {
+    JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+} else {
+    if (JOptionPane.showConfirmDialog(this, "¿Desea eliminar el registro?", "Seleccione una opción", JOptionPane.YES_NO_OPTION) == 0) {
+        int renglon = tlbProductos.getSelectedRow();
+        String id = tlbProductos.getModel().getValueAt(renglon, 0).toString();
+        
+        // Elimina el registro
+        boolean eliminado = new Productos().eliminar(Integer.parseInt(id));
+        
+        if (eliminado) {
+            JOptionPane.showMessageDialog(this, "Se ha eliminado el registro correctamente.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Hubo un problema al eliminar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Refresca la tabla
+        cargarTable("");
+    } else {
+        // Refresca la tabla si el usuario cancela la eliminación
+        cargarTable("");
+    }
+}
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStockActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        cargarTable("");  // Cargar productos
+    tlbProductos.removeColumn(tlbProductos.getColumnModel().getColumn(0));  // Ocultar la columna ID
+    llenarComboProveedores();  // Llenar el ComboBox con los proveedores
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void txtFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroActionPerformed
+       cargarTable(txtFiltro.getText());
+    }//GEN-LAST:event_txtFiltroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,7 +407,72 @@ public class ProductosForm extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void limpiarCampos() {
+    txtNombre.setText("");
+    txtDescripcion.setText("");
+    txtPrecio.setText("");
+    txtStock.setText("");
+    cmbProveedor.setSelectedIndex(0);
+    txtFiltro.setText("");
+
+    this.id = 0;
+}
+    
+    public void cargarTable(String filtro) {
+    Productos producto = new Productos();
+    List<Productos> productos = producto.obtener(filtro);
+
+    DefaultTableModel modelo = (DefaultTableModel) tlbProductos.getModel();
+    modelo.setRowCount(0);  // Limpiar la tabla
+
+    // Iterar sobre los productos y agregar las filas a la tabla
+    for (Productos p : productos) {
+        modelo.addRow(new Object[]{
+            p.getId_producto(),
+            p.getNombre(),
+            p.getDescripcion(),
+            p.getPrecio(),
+            p.getStock(),
+            p.getProveedor() // Mostrar el nombre del proveedor
+        });
+    }
+}
+    
+    private void llenarComboProveedores() {
+    List<Provedores> proveedores = Provedores.obtener("");  // Puedes pasar un filtro si lo necesitas
+    DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+    
+    for (Provedores proveedor : proveedores) {
+        model.addElement(proveedor.getNombre());  // Agrega el nombre del proveedor al modelo
+    }
+    
+    cmbProveedor.setModel(model);  // Establece el modelo en el ComboBox
+}
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cmbProveedor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tlbProductos;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtFiltro;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,7 +24,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-        setSize(600, 400);
+        setSize(480, 380);
         setLocationRelativeTo(null); 
     }
 
@@ -44,16 +44,24 @@ public class Menu extends javax.swing.JFrame {
         btnProvedores = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         btnProductos.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/producto.png"))); // NOI18N
         btnProductos.setText("Productos");
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductosActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnProductos);
         btnProductos.setBounds(10, 70, 130, 40);
 
         btnSalir.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/salir_1.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +72,7 @@ public class Menu extends javax.swing.JFrame {
         btnSalir.setBounds(10, 290, 120, 40);
 
         btnDetalleVenta.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnDetalleVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/report.png"))); // NOI18N
         btnDetalleVenta.setText("DetalleVenta");
         btnDetalleVenta.setIconTextGap(-15);
         btnDetalleVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +84,7 @@ public class Menu extends javax.swing.JFrame {
         btnDetalleVenta.setBounds(10, 230, 130, 40);
 
         btnClientes.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/Clientes.png"))); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +95,7 @@ public class Menu extends javax.swing.JFrame {
         btnClientes.setBounds(10, 20, 130, 40);
 
         btnProvedores.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnProvedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/proveedor.png"))); // NOI18N
         btnProvedores.setText("Provedores");
         btnProvedores.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnProvedores.setIconTextGap(-1);
@@ -97,6 +108,7 @@ public class Menu extends javax.swing.JFrame {
         btnProvedores.setBounds(10, 120, 130, 40);
 
         btnVentas.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/money.png"))); // NOI18N
         btnVentas.setText("Ventas");
         btnVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,15 +117,22 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(btnVentas);
         btnVentas.setBounds(10, 170, 130, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/logo ferreteria 4r.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(240, 80, 170, 170);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/descargar.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 470, 350);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDetalleVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleVentaActionPerformed
         // TODO add your handling code here:
-
+        DetalleVentaForm detalleVentaForm = new DetalleVentaForm();
+        detalleVentaForm.setVisible(true);
     }//GEN-LAST:event_btnDetalleVentaActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
@@ -123,16 +142,26 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnProvedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProvedoresActionPerformed
         // TODO add your handling code here:
+        ProvedoresForm proveedorForm = new ProvedoresForm();
+        proveedorForm.setVisible(true);
     }//GEN-LAST:event_btnProvedoresActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         // TODO add your handling code here:
+        VentaForm ventasForm = new VentaForm();
+        ventasForm.setVisible(true);
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
          this.dispose(); 
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
+        // TODO add your handling code here:
+        ProductosForm productoForm = new ProductosForm();
+        productoForm.setVisible(true);
+    }//GEN-LAST:event_btnProductosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,5 +206,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVentas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

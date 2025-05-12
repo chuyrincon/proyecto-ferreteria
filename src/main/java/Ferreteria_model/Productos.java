@@ -4,6 +4,13 @@
  */
 package Ferreteria_model;
 
+import Ferreteria.db.ConnectionDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Dell
@@ -15,7 +22,8 @@ public class Productos {
    private int precio;
    private int stock;
    private int id_proveedor;
-
+   private String proveedor; 
+   
     public Productos(int id_producto, String nombre, String descripcion, int precio, int stock, int id_proveedor) {
         this.id_producto = id_producto;
         this.nombre = nombre;
@@ -23,6 +31,10 @@ public class Productos {
         this.precio = precio;
         this.stock = stock;
         this.id_proveedor = id_proveedor;
+    }
+
+    public Productos() {
+      
     }
 
     public int getId_producto() {
@@ -72,5 +84,127 @@ public class Productos {
     public void setId_proveedor(int id_proveedor) {
         this.id_proveedor = id_proveedor;
     }
+    
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+    
+    
+    public static List<Productos> obtener(String filtro) {
+    List<Productos> productos = new ArrayList<>();
+    try {
+        Connection conexion = ConnectionDB.conectar();
+        
+        // Consulta SQL para obtener productos con el nombre del proveedor
+        String query = "SELECT p.id_producto, p.nombre, p.descripcion, p.precio, p.stock, pr.nombre AS proveedor "
+                     + "FROM productos p "
+                     + "JOIN provedores pr ON p.id_proveedor = pr.id_proveedor "
+                     + "WHERE p.nombre LIKE ? OR p.descripcion LIKE ?";
+        
+        PreparedStatement statement = conexion.prepareStatement(query);
+        statement.setString(1, "%" + filtro + "%");
+        statement.setString(2, "%" + filtro + "%");
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Productos p = new Productos();
+            p.setId_producto(resultSet.getInt("id_producto"));
+            p.setNombre(resultSet.getString("nombre"));
+            p.setDescripcion(resultSet.getString("descripcion"));
+            p.setPrecio(resultSet.getInt("precio"));
+            p.setStock(resultSet.getInt("stock"));
+            // El nombre del proveedor se obtiene con alias "proveedor"
+            p.setProveedor(resultSet.getString("proveedor")); 
+
+            productos.add(p);
+        }
+    } catch (Exception ex) {
+        System.err.println("Ocurrió un error: " + ex.getMessage());
+    }
+    return productos;
+}
+
+    
+    public static boolean guardar(String nombre, String descripcion, int precio, int stock, int id_proveedor) {
+    boolean resultado = false;
+    try {
+        Connection conexion = ConnectionDB.conectar();
+        String consulta = "INSERT INTO productos (nombre, descripcion, precio, stock, id_proveedor) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = conexion.prepareStatement(consulta);
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        statement.setInt(3, precio);
+        statement.setInt(4, stock);
+        statement.setInt(5, id_proveedor);
+        statement.execute();
+        
+        resultado = statement.getUpdateCount() == 1;
+    } catch (Exception ex) {
+        System.err.println("Ocurrió un error: " + ex.getMessage());
+    }
+    return resultado;
+}
+
+   public static boolean editar(int id_producto, String nombre, String descripcion, int precio, int stock, int id_proveedor) {
+    boolean resultado = false;
+    try {
+        Connection conexion = ConnectionDB.conectar();
+        String query = "UPDATE productos SET nombre=?, descripcion=?, precio=?, stock=?, id_proveedor=? WHERE id_producto=?";
+        PreparedStatement statement = conexion.prepareStatement(query);
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        statement.setInt(3, precio);
+        statement.setInt(4, stock);
+        statement.setInt(5, id_proveedor);
+        statement.setInt(6, id_producto);
+        statement.execute();
+        
+        resultado = statement.getUpdateCount() == 1;
+    } catch (Exception ex) {
+        System.err.println("Ocurrió un error: " + ex.getMessage());
+    }
+    return resultado;
+}
+
+    public static boolean eliminar(int id_cliente){
+     boolean resultado = true;
+        try{
+        Connection conexion = ConnectionDB.conectar();
+        String consulta = "DELETE from clientes WHERE id_producto = ?" ;
+        PreparedStatement statement = conexion.prepareStatement(consulta);
+        statement.setInt(1,id_cliente);
+        statement.execute();
+        resultado = statement.getUpdateCount() == 1;
+        
+        conexion.close();
+        }catch(Exception ex){
+        System.err.println("Ocurrio un error:" + ex.getMessage());
+    }
+    return resultado;
+    }
+    
+    
+    public static boolean editarStock(int idProducto, int nuevoStock) {
+    boolean resultado = false;
+    try {
+        Connection conexion = ConnectionDB.conectar();
+        String query = "UPDATE productos SET stock=? WHERE id_producto=?";
+        PreparedStatement statement = conexion.prepareStatement(query);
+        statement.setInt(1, nuevoStock);
+        statement.setInt(2, idProducto);
+        statement.execute();
+
+        resultado = statement.getUpdateCount() == 1;  // Si se actualizó correctamente
+    } catch (Exception ex) {
+        System.err.println("Ocurrió un error al actualizar el stock: " + ex.getMessage());
+    }
+    return resultado;
+}
+
   
 }
