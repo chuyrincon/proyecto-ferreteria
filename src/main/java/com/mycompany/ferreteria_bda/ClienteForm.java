@@ -110,16 +110,19 @@ public class ClienteForm extends javax.swing.JFrame {
         btnSalir.setBounds(207, 6, 72, 25);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
         jLabel1.setText("Nombre");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(25, 76, 56, 18);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 153, 0));
         jLabel2.setText("Correo");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(25, 110, 46, 18);
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 153, 0));
         jLabel3.setText("Telefono");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(25, 154, 56, 18);
@@ -232,7 +235,7 @@ public class ClienteForm extends javax.swing.JFrame {
     
     // Verifica si se seleccionó una fila
     if (reglon != -1) {
-        // Obtener el ID de la fila seleccionada
+        
         this.id = Integer.parseInt(tblClientes.getModel().getValueAt(reglon, 0).toString());
         
         // Obtener los valores de la fila seleccionada
@@ -245,7 +248,7 @@ public class ClienteForm extends javax.swing.JFrame {
         txtCorreo.setText(correo);
         txtTelefono.setText(telefono);
         
-        // Cambiar el botón de "Guardar" para que funcione como "Editar" (ya está hecho en el método de guardar)
+        // Cambiar el botón de "Guardar" para que funcione como "Editar" 
         btnGuardar.setText("Actualizar");
     } else {
         JOptionPane.showMessageDialog(this, "Por favor, seleccione un cliente para editar.", "Error", JOptionPane.ERROR_MESSAGE);

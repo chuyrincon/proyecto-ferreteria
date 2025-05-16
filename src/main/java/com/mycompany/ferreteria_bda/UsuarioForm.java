@@ -78,6 +78,7 @@ DefaultTableModel modelo;
         btnEliminar.setBounds(115, 6, 74, 25);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 153, 0));
         jLabel2.setText("Correo");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(25, 110, 46, 18);
@@ -94,6 +95,7 @@ DefaultTableModel modelo;
         btnSalir.setBounds(207, 6, 72, 25);
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 153, 0));
         jLabel3.setText("Password");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(25, 155, 56, 18);
@@ -169,6 +171,7 @@ DefaultTableModel modelo;
         txtFiltro.setBounds(25, 256, 321, 22);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
         jLabel1.setText("Nombre");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(25, 76, 56, 18);
@@ -184,11 +187,13 @@ DefaultTableModel modelo;
         btnBuscar.setBounds(358, 255, 72, 25);
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 153, 0));
         jLabel4.setText("Activo");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(25, 229, 46, 18);
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 153, 0));
         jLabel5.setText("Rol");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(25, 195, 46, 18);
@@ -220,7 +225,7 @@ DefaultTableModel modelo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
         if (tblUsuarios.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {

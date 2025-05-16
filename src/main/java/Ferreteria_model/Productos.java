@@ -5,11 +5,24 @@
 package Ferreteria_model;
 
 import Ferreteria.db.ConnectionDB;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  *
@@ -171,13 +184,13 @@ public class Productos {
     return resultado;
 }
 
-    public static boolean eliminar(int id_cliente){
+    public static boolean eliminar(int id_producto){
      boolean resultado = true;
         try{
         Connection conexion = ConnectionDB.conectar();
-        String consulta = "DELETE from clientes WHERE id_producto = ?" ;
+        String consulta = "DELETE from Productos WHERE id_producto = ?" ;
         PreparedStatement statement = conexion.prepareStatement(consulta);
-        statement.setInt(1,id_cliente);
+        statement.setInt(1,id_producto);
         statement.execute();
         resultado = statement.getUpdateCount() == 1;
         
@@ -206,5 +219,27 @@ public class Productos {
     return resultado;
 }
 
-  
+     public JasperPrint reporteTodoProducto() {
+         Connection conexion = ConnectionDB.conectar(); // tu conexión
+
+    try {
+        // Recurso del reporte corregido
+        InputStream is = getClass().getResourceAsStream("/reporte/Blank_A4.jasper");
+
+        if (is == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró el archivo del reporte.", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(is);
+        JasperPrint print = JasperFillManager.fillReport(reporte, null, conexion);
+        return print;
+
+    } catch (JRException ex) {
+        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        return null;
+    }
+     }
+
 }
+

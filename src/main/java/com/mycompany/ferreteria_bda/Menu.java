@@ -39,7 +39,7 @@ public class Menu extends javax.swing.JFrame {
 
         btnProductos = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        btnDetalleVenta = new javax.swing.JButton();
+        btnUsuario = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
         btnProvedores = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
@@ -71,17 +71,17 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(btnSalir);
         btnSalir.setBounds(10, 290, 120, 40);
 
-        btnDetalleVenta.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        btnDetalleVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/report.png"))); // NOI18N
-        btnDetalleVenta.setText("DetalleVenta");
-        btnDetalleVenta.setIconTextGap(-15);
-        btnDetalleVenta.addActionListener(new java.awt.event.ActionListener() {
+        btnUsuario.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/usuario.png"))); // NOI18N
+        btnUsuario.setText("       Usuarios");
+        btnUsuario.setIconTextGap(-15);
+        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalleVentaActionPerformed(evt);
+                btnUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDetalleVenta);
-        btnDetalleVenta.setBounds(10, 230, 130, 40);
+        getContentPane().add(btnUsuario);
+        btnUsuario.setBounds(10, 230, 130, 40);
 
         btnClientes.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/Clientes.png"))); // NOI18N
@@ -129,11 +129,11 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDetalleVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleVentaActionPerformed
+    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
         // TODO add your handling code here:
-        DetalleVentaForm detalleVentaForm = new DetalleVentaForm();
-        detalleVentaForm.setVisible(true);
-    }//GEN-LAST:event_btnDetalleVentaActionPerformed
+        UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setVisible(true);
+    }//GEN-LAST:event_btnUsuarioActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         ClienteForm clienteForm = new ClienteForm();
@@ -200,10 +200,10 @@ public class Menu extends javax.swing.JFrame {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClientes;
-    private javax.swing.JButton btnDetalleVenta;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProvedores;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnUsuario;
     private javax.swing.JButton btnVentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

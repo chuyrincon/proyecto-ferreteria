@@ -31,13 +31,14 @@ public class VentaForm extends javax.swing.JFrame {
      */
     public VentaForm() {
         initComponents();
+        setSize(672, 367);
         cmbProducto.setModel(new DefaultComboBoxModel<>(new String[] {})); // Vacia el ComboBox de Producto
         cmbCliente.setModel(new DefaultComboBoxModel<>(new String[] {}));  // Vacia el ComboBox de Cliente
        
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         cmbProducto.addItemListener(evt -> cmbProductoItemStateChanged(evt));
     }
-
+private int filaSeleccionada = -1;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,6 +66,9 @@ public class VentaForm extends javax.swing.JFrame {
         txtPagar = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         agregarCliente = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -74,6 +78,7 @@ public class VentaForm extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
         jLabel1.setText("Producto");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(30, 20, 90, 16);
@@ -82,18 +87,21 @@ public class VentaForm extends javax.swing.JFrame {
         getContentPane().add(cmbProducto);
         cmbProducto.setBounds(0, 50, 120, 22);
 
+        jLabel2.setForeground(new java.awt.Color(255, 153, 0));
         jLabel2.setText("Cantidad");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(160, 20, 90, 16);
         getContentPane().add(txtCantidad);
         txtCantidad.setBounds(150, 50, 110, 22);
 
+        jLabel3.setForeground(new java.awt.Color(255, 153, 0));
         jLabel3.setText("Precio");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(310, 20, 60, 16);
         getContentPane().add(txtPrecio);
         txtPrecio.setBounds(290, 50, 80, 22);
 
+        jLabel4.setForeground(new java.awt.Color(255, 153, 0));
         jLabel4.setText("Stock");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(420, 20, 60, 16);
@@ -108,20 +116,21 @@ public class VentaForm extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Descripcicon", "Cantidad", "Precio", "Total"
+                "Nombre", "Cantidad", "Precio", "Total"
             }
         ));
         jScrollPane1.setViewportView(tblVenta);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 90, 700, 150);
+        jScrollPane1.setBounds(0, 90, 670, 150);
 
         jLabel5.setText("Seleccionar fecha");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(550, 0, 110, 16);
         getContentPane().add(txtFecha);
-        txtFecha.setBounds(540, 20, 100, 22);
+        txtFecha.setBounds(550, 20, 100, 22);
 
+        jLabel6.setForeground(new java.awt.Color(255, 153, 0));
         jLabel6.setText("Cliente");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(20, 260, 80, 16);
@@ -130,11 +139,18 @@ public class VentaForm extends javax.swing.JFrame {
         getContentPane().add(cmbCliente);
         cmbCliente.setBounds(10, 290, 90, 22);
 
+        jLabel7.setForeground(new java.awt.Color(255, 153, 0));
         jLabel7.setText("Total a pagar");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(500, 270, 80, 16);
+        jLabel7.setBounds(470, 270, 80, 16);
+
+        txtPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPagarActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtPagar);
-        txtPagar.setBounds(590, 270, 100, 22);
+        txtPagar.setBounds(550, 270, 100, 22);
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -143,16 +159,38 @@ public class VentaForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(530, 50, 90, 23);
+        btnAgregar.setBounds(490, 50, 90, 23);
 
-        agregarCliente.setText("agregar cliente");
+        agregarCliente.setText("Agregar Cliente");
         agregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarClienteActionPerformed(evt);
             }
         });
         getContentPane().add(agregarCliente);
-        agregarCliente.setBounds(10, 330, 120, 23);
+        agregarCliente.setBounds(110, 290, 120, 23);
+
+        jButton1.setText("Finalizar Venta");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(470, 310, 110, 23);
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditar);
+        btnEditar.setBounds(590, 50, 72, 23);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/fondo_provedor.png"))); // NOI18N
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(0, 0, 670, 350);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -219,15 +257,56 @@ public class VentaForm extends javax.swing.JFrame {
 
     // Recalcular el total a pagar
     actualizarTotalPagar();
-        
+    txtCantidad.setText("");     
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
       
     ClienteForm clienteForm = new ClienteForm(); // Crea la ventana ClienteForm
     clienteForm.setVisible(true);                // Muestra la ventana ClienteForm
-    this.dispose();   
+      
     }//GEN-LAST:event_agregarClienteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tblVenta.getModel();
+    modelo.setRowCount(0); 
+
+    txtPagar.setText(""); 
+    txtCantidad.setText("");  
+    txtPrecio.setText("");    
+    txtStock.setText("");     
+
+    JOptionPane.showMessageDialog(this, "Venta finalizada "); 
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int renglon = tblVenta.getSelectedRow(); // tablaDetalle es tu JTable
+
+    if (renglon != -1) {
+        // Cargar los valores seleccionados de la fila en los JTextFields
+      String cantidad = tblVenta.getValueAt(renglon, 1).toString();
+      String precio = tblVenta.getValueAt(renglon, 2).toString();
+      String stock = tblVenta.getValueAt(renglon, 3).toString();
+
+
+        txtCantidad.setText(cantidad);
+        txtPrecio.setText(precio);
+        txtStock.setText(stock);
+
+        // Cambiar el botón de "Agregar" a "Actualizar"
+        btnAgregar.setText("Actualizar");
+
+        // Guardar el índice de la fila seleccionada, para usarlo al actualizar
+        filaSeleccionada = renglon;
+    } else {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void txtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPagarActionPerformed
 
     private void actualizarTotalPagar() {
     double totalPagar = 0;
@@ -398,8 +477,10 @@ public class VentaForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JComboBox<String> cmbCliente;
     private javax.swing.JComboBox<String> cmbProducto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -407,6 +488,7 @@ public class VentaForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblVenta;
     private javax.swing.JTextField txtCantidad;

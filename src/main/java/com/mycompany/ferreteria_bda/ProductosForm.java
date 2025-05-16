@@ -6,10 +6,13 @@ package com.mycompany.ferreteria_bda;
 
 import Ferreteria_model.Productos;
 import Ferreteria_model.Provedores;
+import Ferreteria_model.Usuario;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -58,8 +61,8 @@ public class ProductosForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cmbProveedor = new javax.swing.JComboBox<>();
+        btnImprimir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jScrollBar1 = new javax.swing.JScrollBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -70,6 +73,7 @@ public class ProductosForm extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 153, 0));
         jLabel2.setText("Descripcion");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(6, 109, 75, 18);
@@ -86,6 +90,7 @@ public class ProductosForm extends javax.swing.JFrame {
         btnSalir.setBounds(206, 6, 72, 25);
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 153, 0));
         jLabel3.setText("Precio");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(6, 152, 56, 18);
@@ -112,7 +117,7 @@ public class ProductosForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tlbProductos);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 302, 577, 151);
+        jScrollPane1.setBounds(0, 302, 560, 151);
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +166,7 @@ public class ProductosForm extends javax.swing.JFrame {
         txtFiltro.setBounds(32, 267, 321, 22);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
         jLabel1.setText("Nombre");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(6, 75, 56, 18);
@@ -195,11 +201,13 @@ public class ProductosForm extends javax.swing.JFrame {
         txtStock.setBounds(87, 189, 172, 22);
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 153, 0));
         jLabel4.setText("Proveedor");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(6, 226, 75, 18);
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 153, 0));
         jLabel5.setText("Stock");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(6, 192, 56, 18);
@@ -208,11 +216,18 @@ public class ProductosForm extends javax.swing.JFrame {
         getContentPane().add(cmbProveedor);
         cmbProveedor.setBounds(87, 223, 172, 22);
 
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/imprimir.png"))); // NOI18N
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnImprimir);
+        btnImprimir.setBounds(530, 260, 40, 30);
+
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/fondo_producto.png"))); // NOI18N
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 0, 590, 460);
-        getContentPane().add(jScrollBar1);
-        jScrollBar1.setBounds(560, 330, 10, 48);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -331,30 +346,29 @@ if (reglon != -1) {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
     // TODO add your handling code here:
-if (tlbProductos.getSelectedRow() == -1) {
-    JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
-} else {
-    if (JOptionPane.showConfirmDialog(this, "¿Desea eliminar el registro?", "Seleccione una opción", JOptionPane.YES_NO_OPTION) == 0) {
-        int renglon = tlbProductos.getSelectedRow();
-        String id = tlbProductos.getModel().getValueAt(renglon, 0).toString();
-        
-        // Elimina el registro
-        boolean eliminado = new Productos().eliminar(Integer.parseInt(id));
-        
-        if (eliminado) {
-            JOptionPane.showMessageDialog(this, "Se ha eliminado el registro correctamente.", "Información", JOptionPane.INFORMATION_MESSAGE);
+     if (tlbProductos.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Hubo un problema al eliminar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (JOptionPane.showConfirmDialog(this, "¿Desea eliminar el registro?", "Seleccione una opción", JOptionPane.YES_NO_OPTION) == 0) {
+                int renglon = tlbProductos.getSelectedRow();
+                String id = tlbProductos.getModel().getValueAt(renglon, 0).toString();
+
+                // Elimina el registro
+                boolean eliminado = new Productos ().eliminar(Integer.parseInt(id));
+
+                if (eliminado) {
+                    JOptionPane.showMessageDialog(this, "Se ha eliminado el registro correctamente.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un problema al eliminar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                // Refresca la tabla
+                cargarTable("");
+            } else {
+                // Refresca la tabla si el Productos cancela la eliminación
+                cargarTable("");
+            }
         }
-
-        // Refresca la tabla
-        cargarTable("");
-    } else {
-        // Refresca la tabla si el usuario cancela la eliminación
-        cargarTable("");
-    }
-}
-
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
@@ -371,6 +385,17 @@ if (tlbProductos.getSelectedRow() == -1) {
     private void txtFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroActionPerformed
        cargarTable(txtFiltro.getText());
     }//GEN-LAST:event_txtFiltroActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+           Productos producto = new Productos();
+    JasperPrint jp = producto.reporteTodoProducto();
+
+    if (jp != null) {
+        JasperViewer.viewReport(jp, false);  // 'false' para que no cierre la app al cerrar el visor
+    } else {
+        JOptionPane.showMessageDialog(this, "No se pudo generar el reporte.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -458,6 +483,7 @@ if (tlbProductos.getSelectedRow() == -1) {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbProveedor;
     private javax.swing.JLabel jLabel1;
@@ -466,7 +492,6 @@ if (tlbProductos.getSelectedRow() == -1) {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tlbProductos;
     private javax.swing.JTextField txtDescripcion;

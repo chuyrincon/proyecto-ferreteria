@@ -85,6 +85,7 @@ DefaultTableModel modelo;
         btnEditar.setBounds(25, 6, 72, 25);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
         jLabel1.setText("Nombre");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(25, 75, 56, 18);
@@ -101,6 +102,7 @@ DefaultTableModel modelo;
         btnEliminar.setBounds(115, 6, 74, 25);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 153, 0));
         jLabel2.setText("Correo");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(25, 109, 46, 18);
@@ -117,6 +119,7 @@ DefaultTableModel modelo;
         btnSalir.setBounds(206, 6, 72, 25);
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 153, 0));
         jLabel3.setText("Telefono");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(25, 152, 56, 18);
