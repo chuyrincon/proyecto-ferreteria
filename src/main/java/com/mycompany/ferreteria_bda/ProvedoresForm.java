@@ -71,7 +71,7 @@ DefaultTableModel modelo;
             }
         });
         getContentPane().add(btnGuardar);
-        btnGuardar.setBounds(187, 149, 90, 25);
+        btnGuardar.setBounds(200, 150, 90, 25);
 
         btnEditar.setBackground(new java.awt.Color(255, 255, 51));
         btnEditar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
